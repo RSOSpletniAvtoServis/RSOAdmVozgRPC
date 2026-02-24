@@ -1,0 +1,87 @@
+syntax = "proto3";
+
+package admvoz;
+
+service AdminService {
+  rpc IzbraniKraji (GetIzbraniKrajiRequest) returns (IzbraniKrajiResponse);
+  rpc IzbraneStoritve (GetIzbraneStoritveRequest) returns (IzbraneStoritveResponse);
+  rpc IzbraniStatusi (GetIzbraniStatusiRequest) returns (IzbraniStatusiResponse);
+  rpc IzbranaVozila (GetIzbranaVozilaRequest) returns (IzbranaVozilaResponse);
+  rpc IzbranaVozila1 (GetIzbranaVozila1Request) returns (IzbranaVozila1Response);
+}
+
+message GetIzbraniKrajiRequest {
+  repeated int32 ids = 1;
+  string uniqueid = 2;
+}
+
+message GetIzbraneStoritveRequest {
+  repeated int32 ids = 1;
+  string uniqueid = 2;
+}
+
+message GetIzbraniStatusiRequest {
+  repeated int32 ids = 1;
+  string uniqueid = 2;
+}
+
+message GetIzbranaVozilaRequest {
+  repeated string stsas = 1;
+  int32 iduporabnik 2;
+  string uniqueid = 3;
+}
+message GetIzbranaVozila1Request {
+  repeated string stsas = 1;
+  string uniqueid = 2;
+}
+
+message Kraji {
+  int32 IDKraj = 1;
+  string NazivKraja = 2;
+}
+
+message Storitve {
+  int32 IDStoritev = 1;
+  string NazivStoritve = 2;
+}
+
+message Status {
+  int32 IDStatus = 1;
+  string NazivStatusa = 2;
+}
+
+message Vozilo {
+  string StevilkaSasije = 1;
+  int32 IDZnamka = 2;
+  int32 IDModel = 3;
+  string NazivZnamke = 4;
+  string NazivModel = 5;
+}
+message Stranka {
+  int32 IDStranka = 1;
+  string Ime = 2;
+  string Priimek = 3;
+  string Telefon = 4;
+  string Email = 5;
+  string DavcnaStevilka = 6;
+}
+
+message IzbraniKrajiResponse {
+  repeated Kraji kraji = 1;
+}
+
+message IzbraneStoritveResponse {
+  repeated Storitve stortve = 1;
+}
+
+message IzbraniStatusiResponse {
+  repeated Status status = 1;
+}
+
+message IzbranaVozilaResponse {
+  repeated Vozila vozila = 1;
+}
+
+message IzbranaVozila1Response {
+  repeated Vozila vozila = 1;
+}
