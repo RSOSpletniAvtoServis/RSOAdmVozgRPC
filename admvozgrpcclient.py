@@ -10,7 +10,7 @@ def get_izbraniKraji():
 
         kraji_response = stub.IzbraniKraji(
             admvozgrpc_pb2.GetIzbraniKrajiRequest(
-                ids=[1, 2, 3],
+                ids=[],
                 uniqueid="123"
             )
         )

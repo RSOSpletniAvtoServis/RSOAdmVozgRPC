@@ -49,11 +49,14 @@ class AdminService(admvozgrpc_pb2_grpc.AdminServiceServicer):
         print(ids_string)
         print(idmiddle)
         print(full_string)
-        
+        if len(request.ids) > 0:
+            full_string = "WHERE IDKraj IN "+ full_string
+        else:
+            full_string = "WHERE 1 = 0"
         try:
             with pool.get_connection() as conn:
                 with conn.cursor() as cursor:
-                    sql = "SELECT IDKraj, NazivKraja FROM Kraj WHERE IDKraj IN " + full_string
+                    sql = "SELECT IDKraj, NazivKraja FROM Kraj " + full_string
                     cursor.execute(sql)
                     rows = cursor.fetchall()
 
@@ -85,11 +88,15 @@ class AdminService(admvozgrpc_pb2_grpc.AdminServiceServicer):
         print(ids_string)
         print(idmiddle)
         print(full_string)
-        
+        if len(request.ids) > 0:
+            full_string = "WHERE IDStoritev IN "+ full_string
+        else:
+            full_string = "WHERE 1 = 0"
+            
         try:
             with pool.get_connection() as conn:
                 with conn.cursor() as cursor:
-                    sql = "SELECT IDStoritev, NazivStoritve FROM Storitev WHERE IDStoritev IN " + full_string
+                    sql = "SELECT IDStoritev, NazivStoritve FROM Storitev " + full_string
                     cursor.execute(sql)
                     rows = cursor.fetchall()
 
@@ -123,11 +130,15 @@ class AdminService(admvozgrpc_pb2_grpc.AdminServiceServicer):
         print(ids_string)
         print(idmiddle)
         print(full_string)
+        if len(request.ids) > 0:
+            full_string = "WHERE IDStatus IN "+ full_string
+        else:
+            full_string = "WHERE 1 = 0"
         
         try:
             with pool.get_connection() as conn:
                 with conn.cursor() as cursor:
-                    sql = "SELECT IDStatus, NazivStatusa FROM Status WHERE IDStatus IN " + full_string
+                    sql = "SELECT IDStatus, NazivStatusa FROM Status " + full_string
                     cursor.execute(sql)
                     rows = cursor.fetchall()
 
@@ -196,11 +207,15 @@ class AdminService(admvozgrpc_pb2_grpc.AdminServiceServicer):
         print(ids_string)
         print(idmiddle)
         print(full_string)
+        if len(request.stsas) > 0:
+            full_string = "AND v.StevilkaSasije IN "+ full_string
+        else:
+            full_string = "AND 1 = 0"
         
         try:
             with pool.get_connection() as conn:
                 with conn.cursor() as cursor:
-                    sql = "SELECT v.StevilkaSasije, v.IDZnamka, v.IDModel, z.NazivZnamke, m.NazivModel  FROM Vozilo v, Znamka z, Model m WHERE v.IDZnamka = z.IDZnamka AND v.IDModel = m.IDModel AND v.StevilkaSasije IN " + full_string
+                    sql = "SELECT v.StevilkaSasije, v.IDZnamka, v.IDModel, z.NazivZnamke, m.NazivModel  FROM Vozilo v, Znamka z, Model m WHERE v.IDZnamka = z.IDZnamka AND v.IDModel = m.IDModel " + full_string
                     cursor.execute(sql)
                     rows = cursor.fetchall()
                     for row in rows:
